@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { trackEvent } from '../../utils/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, ChevronDown, CheckCircle, AlertCircle } from 'lucide-react';
