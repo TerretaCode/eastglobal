@@ -1,7 +1,48 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { trackEvent } from '../../utils/analytics';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Waves, Search, FileEdit, Presentation, Trophy, Users, Target, Rocket } from 'lucide-react';
+
+// Separate component to properly use hooks (avoids useTransform inside map)
+const TimelineItem = ({ item, index, scrollYProgress, transforms }) => {
+    const scale = useTransform(scrollYProgress, transforms.scaleRange, [0, 1]);
+    const opacity = useTransform(scrollYProgress, transforms.opacityRange, [0, 1]);
+    const color = useTransform(scrollYProgress, transforms.colorRange, ["rgb(235, 199, 221)", "#000000"]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className={`relative flex w-full items-center ${item.align === 'left' ? 'md:justify-start' : 'md:justify-end'}`}
+        >
+            <div className={`w-[calc(100%-5rem)] md:w-1/2 ml-20 md:ml-0 ${item.align === 'right' ? 'md:pl-12' : 'md:pr-12 md:text-right'}`}>
+                <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-10 md:w-12 h-10 md:h-12 flex items-center justify-center z-20">
+                    {/* Static background circle */}
+                    <div className="absolute inset-0 rounded-full border-4 border-white/10 bg-black"></div>
+
+                    {/* Dynamic active circle */}
+                    <motion.div
+                        style={{ scale, opacity }}
+                        className="absolute inset-0 rounded-full bg-brand shadow-brand/50"
+                    />
+
+                    <motion.div
+                        style={{ color }}
+                        className="relative z-30"
+                    >
+                        <item.icon className="w-5 h-5 transition-colors duration-300" />
+                    </motion.div>
+                </div>
+                <div className="bg-zinc-900/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/5 hover:border-brand/50 transition-all duration-300">
+                    <h3 className="text-xl md:text-2xl font-bold text-brand mb-2">{item.title}</h3>
+                    <p className="text-gray-300 text-sm md:text-base leading-relaxed">{item.desc}</p>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 const ProcessTimeline = () => {
     const containerRef = useRef(null);
@@ -15,6 +56,19 @@ const ProcessTimeline = () => {
         damping: 30,
         restDelta: 0.001
     });
+
+    // Pre-compute transforms for each timeline item to avoid creating motion values inside map
+    const itemTransforms = useMemo(() => {
+        const items = [0, 1, 2, 3];
+        return items.map((index) => {
+            const threshold = index / 3;
+            return {
+                scaleRange: [threshold - 0.05, threshold],
+                opacityRange: [threshold - 0.05, threshold],
+                colorRange: [threshold - 0.05, threshold]
+            };
+        });
+    }, []);
 
     return (
         <section className="py-32 bg-black relative overflow-hidden">
@@ -73,50 +127,15 @@ const ProcessTimeline = () => {
                             icon: Presentation,
                             align: 'left'
                         },
-                    ].map((item, index) => {
-                        // Calculate threshold for this specific item (roughly index / count)
-                        const threshold = (index) / (4 - 1);
-
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                className={`relative flex w-full items-center ${item.align === 'left' ? 'md:justify-start' : 'md:justify-end'}`}
-                            >
-                                <div className={`w-[calc(100%-5rem)] md:w-1/2 ml-20 md:ml-0 ${item.align === 'right' ? 'md:pl-12' : 'md:pr-12 md:text-right'}`}>
-                                    <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-10 md:w-12 h-10 md:h-12 flex items-center justify-center z-20">
-                                        {/* Static background circle */}
-                                        <div className="absolute inset-0 rounded-full border-4 border-white/10 bg-black"></div>
-
-                                        {/* Dynamic active circle */}
-                                        <motion.div
-                                            style={{
-                                                scale: useTransform(scrollYProgress, [threshold - 0.05, threshold], [0, 1]),
-                                                opacity: useTransform(scrollYProgress, [threshold - 0.05, threshold], [0, 1])
-                                            }}
-                                            className="absolute inset-0 rounded-full bg-brand shadow-brand/50"
-                                        />
-
-                                        <motion.div
-                                            style={{
-                                                color: useTransform(scrollYProgress, [threshold - 0.05, threshold], ["rgb(235, 199, 221)", "#000000"])
-                                            }}
-                                            className="relative z-30"
-                                        >
-                                            <item.icon className="w-5 h-5 transition-colors duration-300" />
-                                        </motion.div>
-                                    </div>
-                                    <div className="bg-zinc-900/80 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-white/5 hover:border-brand/50 transition-all duration-300">
-                                        <h3 className="text-xl md:text-2xl font-bold text-brand mb-2">{item.title}</h3>
-                                        <p className="text-gray-300 text-sm md:text-base leading-relaxed">{item.desc}</p>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                    ].map((item, index) => (
+                        <TimelineItem
+                            key={index}
+                            item={item}
+                            index={index}
+                            scrollYProgress={scrollYProgress}
+                            transforms={itemTransforms[index]}
+                        />
+                    ))}
                 </div>
 
                 {/* Final Transformation Card */}
