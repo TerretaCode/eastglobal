@@ -15,7 +15,7 @@ const WhatsAppButton = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClick}
-            className="fixed bottom-8 left-8 z-[90] p-4 bg-brand rounded-full shadow-lg shadow-brand/30 hover:scale-110 transition-all duration-300 group"
+            className="fixed bottom-8 right-8 z-[90] p-4 bg-brand rounded-full shadow-lg shadow-brand/30 hover:scale-110 transition-all duration-300 group"
             aria-label="Contactar por WhatsApp"
         >
             <svg 

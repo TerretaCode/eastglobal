@@ -4,7 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import BackToTop from './components/common/BackToTop';
 import WhatsAppButton from './components/common/WhatsAppButton';
 import BackgroundEffects from './components/BackgroundEffects';
 import CookieConsent from './components/CookieConsent';
@@ -55,7 +54,6 @@ function App() {
                         </Suspense>
                     </main>
                     <Footer />
-                    <BackToTop />
                     <WhatsAppButton />
                     <CookieConsent />
                 </div>
