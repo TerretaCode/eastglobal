@@ -32,10 +32,10 @@ function App() {
         <HelmetProvider>
             <Router>
                 <ScrollToTop />
-                <div className="min-h-screen bg-black text-white selection:bg-brand/30 selection:text-white relative">
+                <div className="min-h-screen bg-black text-white selection:bg-brand/30 selection:text-white relative flex flex-col">
                     <BackgroundEffects />
                     <Navbar />
-                    <main className="relative z-10">
+                    <main className="relative z-10 flex-grow min-h-screen">
                         <Suspense fallback={<PageLoader />}>
                             <Routes>
                                 <Route path="/" element={<Home />} />

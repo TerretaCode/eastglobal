@@ -10,6 +10,9 @@ const NosotrosHero = () => {
                     src="/equiporesponsive-DtZUJ231.jpeg"
                     alt="Equipo East Global"
                     className="w-full h-full object-cover object-center opacity-70"
+                    width="1920"
+                    height="1080"
+                    loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
             </div>

@@ -63,11 +63,13 @@ const TeamSection = () => {
                             transition={{ delay: idx * 0.1 }}
                             className="group"
                         >
-                            <div className="relative overflow-hidden rounded-2xl h-80 mb-6">
+                            <div className="relative overflow-hidden rounded-2xl h-80 mb-6 aspect-[3/4]">
                                 <Image
                                     src={member.image}
                                     alt={member.name}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    width="400"
+                                    height="533"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                             </div>
