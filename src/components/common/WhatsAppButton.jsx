@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { trackEvent } from '../../utils/analytics';
 
 const WhatsAppButton = () => {
+    const [isVisible, setIsVisible] = useState(false);
     const phoneNumber = '34699984661';
     const message = 'Hola, me gustaría obtener más información.';
+    
+    useEffect(() => {
+        let ticking = false;
+        
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    setIsVisible(window.scrollY > 200);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     
     const handleClick = () => {
         trackEvent('whatsapp', 'click', 'floating_button');
@@ -15,7 +33,9 @@ const WhatsAppButton = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClick}
-            className="fixed bottom-8 right-8 z-[90] p-4 bg-brand rounded-full shadow-lg shadow-brand/30 hover:scale-110 transition-all duration-300 group"
+            className={`fixed bottom-8 right-8 z-[90] p-4 bg-brand rounded-full shadow-lg shadow-brand/30 hover:scale-110 transition-all duration-300 ${
+                isVisible ? 'opacity-100 scale-100 animate-subtle-bounce' : 'opacity-0 scale-75 pointer-events-none'
+            }`}
             aria-label="Contactar por WhatsApp"
         >
             <svg 

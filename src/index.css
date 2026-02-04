@@ -86,6 +86,19 @@
     }
 }
 
+@keyframes subtleBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.animate-subtle-bounce {
+    animation: subtleBounce 2s ease-in-out infinite;
+}
+
 /* Custom styles mimicking the original site's premium feel */
 .glass-effect {
     @apply bg-white/5 backdrop-blur-lg border border-white/10;
