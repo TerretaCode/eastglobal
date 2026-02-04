@@ -81,6 +81,8 @@ const Navbar = () => {
                             alt="East Global Web Logo"
                             className="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300 mix-blend-normal"
                             loading="eager"
+                            width="162"
+                            height="70"
                         />
                     </Link>
 
@@ -114,6 +116,8 @@ const Navbar = () => {
                                         alt="ES"
                                         className="w-5 h-3.5 object-cover rounded-sm shadow-sm"
                                         loading="eager"
+                                        width="20"
+                                        height="14"
                                     />
                                 </div>
                                 <span className="tracking-wide">ES</span>

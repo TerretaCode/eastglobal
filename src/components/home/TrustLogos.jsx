@@ -11,13 +11,15 @@ const TrustLogos = () => {
                     </span>
                 </h2>
             </div>
-            <div className="relative flex overflow-x-hidden group">
+            <div className="relative flex overflow-x-hidden group min-h-[100px] md:min-h-[130px]">
                 <div className="py-8 animate-marquee-ltr whitespace-nowrap flex items-center">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i, idx) => (
                         <div key={idx} className="mx-8 md:mx-12 min-w-[120px] flex justify-center grayscale hover:grayscale-0 transition-all duration-500">
                             <Image
                                 src={`/assets/${i}-RwQrWFuB.png`.replace('1-RwQrWFuB', `${i}`).replace('2-RwQrWFuB', '1-RwQrWFuB')}
                                 alt={`Cliente ${i}`}
+                                width="120"
+                                height="64"
                                 className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity"
                             />
                         </div>
@@ -25,13 +27,15 @@ const TrustLogos = () => {
                 </div>
             </div>
 
-            <div className="relative flex overflow-x-hidden group mt-4">
+            <div className="relative flex overflow-x-hidden group mt-4 min-h-[100px] md:min-h-[130px]">
                 <div className="py-8 animate-marquee-rtl whitespace-nowrap flex items-center">
                     {[10, 11, 12, 13, 14, 15, 16, 17, 10, 11, 12, 13, 14, 15, 16, 17].map((i, idx) => (
                         <div key={idx} className="mx-8 md:mx-12 min-w-[120px] flex justify-center grayscale hover:grayscale-0 transition-all duration-500">
                             <Image
                                 src={`/assets/${i}-B2MGW41f.png`.replace('17-B2MGW41f', `${i}`)}
                                 alt={`Cliente ${i}`}
+                                width="120"
+                                height="64"
                                 className="h-12 md:h-16 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity"
                             />
                         </div>

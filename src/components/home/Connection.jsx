@@ -25,11 +25,18 @@ const Connection = () => {
                         </p>
                     </div>
                     <div className="relative group">
-                        <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-white/5">
+                        <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-white/5 aspect-[3/2]">
                             <Image
                                 src="/FotoHomepage_EncimaLogos-DoYCUdFl.jpg"
                                 alt="Equipo EAST trabajando"
-                                className="w-full h-96 md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                width="1008"
+                                height="672"
+                                style={{
+                                    aspectRatio: '3/2',
+                                    width: '100%',
+                                    height: 'auto'
+                                }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                             <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20"></div>
