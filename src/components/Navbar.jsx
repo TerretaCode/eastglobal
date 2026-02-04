@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    // UseRef to track lastScrollY without triggering re-renders
+    const lastScrollY = React.useRef(0);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
     const location = useLocation();
@@ -33,20 +34,23 @@ const Navbar = () => {
             // Visibility logic
             if (isMobileMenuOpen) {
                 setIsVisible(true);
-            } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                // Scrolling down - hide
+            } else if (currentScrollY > lastScrollY.current && currentScrollY > 60) {
+                // Scrolling down - hide (lowered threshold to 60)
                 setIsVisible(false);
             } else {
                 // Scrolling up or at top - show
                 setIsVisible(true);
             }
 
-            setLastScrollY(currentScrollY);
+            lastScrollY.current = currentScrollY;
         };
+
+        // Initial check
+        handleScroll();
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY, isMobileMenuOpen]);
+    }, [isMobileMenuOpen]); // Removed lastScrollY dependency to improve performance
 
     const navLinks = [
         { name: 'Inicio', path: '/' },
@@ -159,14 +163,14 @@ const Navbar = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[105] lg:hidden bg-black w-full h-screen"
+                        className="fixed inset-0 z-[105] lg:hidden bg-black w-full h-[100dvh] overflow-y-auto"
                     >
                         <motion.div
                             initial={{ y: -20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
                             transition={{ delay: 0.1, duration: 0.3 }}
-                            className="flex flex-col items-center justify-center h-full space-y-8 px-6 pt-16"
+                            className="flex flex-col items-center justify-start min-h-full space-y-6 px-6 pt-24 pb-12"
                         >
                             {navLinks.map((link, index) => (
                                 <motion.div
