@@ -117,8 +117,8 @@ const Footer = () => {
                         © {currentYear} Created by <span className="text-[#EBC7DD] font-semibold">EAST</span>
                     </p>
                     <div className="flex space-x-8">
-                        <Link to="/privacy" className="text-gray-500 hover:text-[#EBC7DD] text-sm transition-colors">Privacidad</Link>
-                        <Link to="/terms" className="text-gray-500 hover:text-[#EBC7DD] text-sm transition-colors">Términos</Link>
+                        <Link to="/privacidad" className="text-gray-500 hover:text-[#EBC7DD] text-sm transition-colors">Privacidad</Link>
+                        <Link to="/terminos" className="text-gray-500 hover:text-[#EBC7DD] text-sm transition-colors">Términos</Link>
                         <Link to="/cookies" className="text-gray-500 hover:text-[#EBC7DD] text-sm transition-colors">Cookies</Link>
                     </div>
                 </div>

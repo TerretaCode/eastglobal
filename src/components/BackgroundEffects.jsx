@@ -1,26 +1,45 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const BackgroundEffects = () => {
-    // Generate background blooms (framer-motion is fine here for slow transitions)
-    const blooms = useMemo(() => Array.from({ length: 5 }, (_, i) => ({
+    // Detect mobile for performant rendering
+    const [isMobile, setIsMobile] = useState(() =>
+        typeof window !== 'undefined' ? window.innerWidth < 768 : false
+    );
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Generate background blooms 
+    // Optimization: Reduced count on mobile & gradients instead of blur
+    const bloomCount = isMobile ? 2 : 5;
+    const blooms = useMemo(() => Array.from({ length: bloomCount }, (_, i) => ({
         id: i,
-        size: Math.random() * 500 + 400,
+        size: isMobile ? Math.random() * 300 + 300 : Math.random() * 500 + 400,
         top: `${Math.random() * 100}%`,
         left: `${Math.random() * 100}%`,
-        duration: Math.random() * 25 + 20,
+        duration: isMobile ? Math.random() * 15 + 20 : Math.random() * 25 + 20,
         delay: Math.random() * 10,
-    })), []);
+    })), [isMobile, bloomCount]);
 
     // Generate embers for CSS animation
-    const embers = useMemo(() => Array.from({ length: 12 }, (_, i) => ({
+    // Optimization: Reduced count on mobile
+    const emberCount = isMobile ? 6 : 12;
+    const embers = useMemo(() => Array.from({ length: emberCount }, (_, i) => ({
         id: i,
-        size: Math.random() * 2 + 1,
+        // Larger visual size on mobile since we remove the glow/shadow
+        size: Math.random() * 2 + (isMobile ? 2 : 1),
         left: `${Math.random() * 100}%`,
         duration: Math.random() * 8 + 10,
         delay: Math.random() * -20, // Negative delay to start mid-animation
-        drift: (Math.random() - 0.5) * 100,
-    })), []);
+        drift: (Math.random() - 0.5) * (isMobile ? 50 : 100), // Less drift on mobile
+    })), [isMobile, emberCount]);
 
     return (
         <>
@@ -28,25 +47,26 @@ const BackgroundEffects = () => {
                 {`
                 @keyframes rise {
                     0% {
-                        transform: translateY(110vh) translateX(0);
+                        transform: translate3d(0, 110vh, 0);
                         opacity: 0;
                     }
                     10% {
-                        opacity: 0.5;
+                        opacity: ${isMobile ? 0.3 : 0.5};
                     }
                     90% {
-                        opacity: 0.5;
+                        opacity: ${isMobile ? 0.3 : 0.5};
                     }
                     100% {
-                        transform: translateY(-10vh) translateX(var(--drift));
+                        transform: translate3d(var(--drift), -10vh, 0);
                         opacity: 0;
                     }
                 }
                 .ember {
                     position: absolute;
-                    background-color: #EBC7DD;
-                    border-radius: 50%;
-                    box-shadow: 0 0 10px rgba(235, 199, 221, 0.6);
+                    /* Optimization: Use gradient instead of box-shadow for glow */
+                    background: radial-gradient(circle, #EBC7DD 0%, transparent 70%);
+                    /* Only apply box-shadow on desktop where GPU can handle it easily */
+                    ${!isMobile ? 'box-shadow: 0 0 10px rgba(235, 199, 221, 0.6);' : ''}
                     will-change: transform;
                     animation: rise var(--duration) linear infinite;
                     animation-delay: var(--delay);
@@ -55,16 +75,17 @@ const BackgroundEffects = () => {
             </style>
 
             {/* Background Blooms - Deep Background Layer */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+            <div className={`fixed inset-0 pointer-events-none overflow-hidden z-0 ${isMobile ? 'opacity-50' : ''}`}>
                 {blooms.map((bloom) => (
                     <motion.div
                         key={`bloom-${bloom.id}`}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{
-                            opacity: [0.01, 0.04, 0.01],
+                            // Simplified animation values for mobile
+                            opacity: isMobile ? [0.05, 0.1, 0.05] : [0.05, 0.15, 0.05],
                             scale: [1, 1.15, 1],
-                            x: [0, 40, -40, 0],
-                            y: [0, -40, 40, 0],
+                            x: isMobile ? [0, 20, 0] : [0, 40, -40, 0],
+                            y: isMobile ? [0, -20, 0] : [0, -40, 40, 0],
                         }}
                         transition={{
                             duration: bloom.duration,
@@ -78,9 +99,10 @@ const BackgroundEffects = () => {
                             left: bloom.left,
                             width: bloom.size,
                             height: bloom.size,
-                            backgroundColor: '#EBC7DD',
+                            // Optimization: Replaced expensive filter:blur with radial-gradient
+                            background: 'radial-gradient(circle, rgba(235, 199, 221, 0.15) 0%, transparent 60%)',
                             borderRadius: '50%',
-                            filter: 'blur(160px)',
+                            willChange: 'transform, opacity'
                         }}
                     />
                 ))}
