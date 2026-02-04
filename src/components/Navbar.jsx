@@ -3,7 +3,6 @@ import { trackEvent } from '../utils/analytics';
 import { Link, useLocation } from 'react-router-dom';
 import Image from './common/Image';
 import { Menu, X, Globe, ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -136,14 +135,11 @@ const Navbar = () => {
                                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-500 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
                             </button>
 
-                            <AnimatePresence>
-                                {isLangMenuOpen && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 15, scale: 0.95 }}
-                                        className="absolute right-0 mt-3 w-40 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 p-1.5"
-                                    >
+                            <div
+                                    className={`absolute right-0 mt-3 w-40 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 p-1.5 transition-all duration-200 origin-top-right ${
+                                        isLangMenuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                                    }`}
+                                >
                                         {languages.map((lang) => (
                                             <button
                                                 key={lang.code}
@@ -163,9 +159,7 @@ const Navbar = () => {
                                                 )}
                                             </button>
                                         ))}
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                </div>
                         </div>
                     </div>
 
@@ -182,66 +176,48 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Navigation Overlay */}
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[105] lg:hidden bg-black w-full h-[100dvh] overflow-y-auto"
-                    >
-                        <motion.div
-                            initial={{ y: -20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: -20, opacity: 0 }}
-                            transition={{ delay: 0.1, duration: 0.3 }}
-                            className="flex flex-col items-center justify-start min-h-full space-y-6 px-6 pt-24 pb-12"
-                        >
-                            {navLinks.map((link, index) => (
-                                <motion.div
-                                    key={link.name}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2 + (index * 0.05) }}
-                                    className="w-full text-center"
-                                >
-                                    <Link
-                                        to={link.path}
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className={`text-4xl font-bold transition-all duration-300 ${location.pathname === link.path ? 'text-brand' : 'text-white'
-                                            }`}
-                                    >
-                                        {link.name}
-                                    </Link>
-                                </motion.div>
-                            ))}
-
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="flex space-x-6 pt-12 border-t border-white/10 w-full justify-center"
+            <div
+                className={`fixed inset-0 z-[105] lg:hidden bg-black w-full h-[100dvh] overflow-y-auto transition-opacity duration-300 ${
+                    isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
+            >
+                <div
+                    className={`flex flex-col items-center justify-start min-h-full space-y-6 px-6 pt-24 pb-12 transition-all duration-300 ${
+                        isMobileMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-5 opacity-0'
+                    }`}
+                >
+                    {navLinks.map((link) => (
+                        <div key={link.name} className="w-full text-center">
+                            <Link
+                                to={link.path}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={`text-4xl font-bold transition-all duration-300 ${location.pathname === link.path ? 'text-brand' : 'text-white'
+                                    }`}
                             >
-                                {languages.map((lang) => (
-                                    <button
-                                        key={lang.code}
-                                        className="flex flex-col items-center space-y-2 text-gray-400 hover:text-white font-medium group"
-                                    >
-                                        <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:border-brand/50 transition-all">
-                                            <Image
-                                                src={lang.flag}
-                                                alt={lang.code}
-                                                className="w-8 h-5 object-cover rounded shadow-sm"
-                                            />
-                                        </div>
-                                        <span className="text-xs tracking-widest">{lang.code}</span>
-                                    </button>
-                                ))}
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                                {link.name}
+                            </Link>
+                        </div>
+                    ))}
+
+                    <div className="flex space-x-6 pt-12 border-t border-white/10 w-full justify-center">
+                        {languages.map((lang) => (
+                            <button
+                                key={lang.code}
+                                className="flex flex-col items-center space-y-2 text-gray-400 hover:text-white font-medium group"
+                            >
+                                <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:border-brand/50 transition-all">
+                                    <Image
+                                        src={lang.flag}
+                                        alt={lang.code}
+                                        className="w-8 h-5 object-cover rounded shadow-sm"
+                                    />
+                                </div>
+                                <span className="text-xs tracking-widest">{lang.code}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </header>
     );
 };

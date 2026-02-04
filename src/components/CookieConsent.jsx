@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronDown, ChevronUp, Shield, Settings } from 'lucide-react';
+import { Shield, Settings } from 'lucide-react';
 
 const CookieConsent = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false);
     const [showConfig, setShowConfig] = useState(false);
     const [preferences, setPreferences] = useState({
-        technical: true, // Always required
+        technical: true,
         analytics: false,
         marketing: false
     });
@@ -14,11 +14,18 @@ const CookieConsent = () => {
     useEffect(() => {
         const consent = localStorage.getItem('cookieConsent');
         if (!consent) {
-            // Small delay for entrance animation
-            const timer = setTimeout(() => setIsVisible(true), 1000);
+            const timer = setTimeout(() => {
+                setIsVisible(true);
+                requestAnimationFrame(() => setIsAnimating(true));
+            }, 1000);
             return () => clearTimeout(timer);
         }
     }, []);
+
+    const hideConsent = () => {
+        setIsAnimating(false);
+        setTimeout(() => setIsVisible(false), 300);
+    };
 
     const handleAcceptAll = () => {
         const allConsent = {
@@ -28,7 +35,7 @@ const CookieConsent = () => {
             timestamp: new Date().toISOString()
         };
         localStorage.setItem('cookieConsent', JSON.stringify(allConsent));
-        setIsVisible(false);
+        hideConsent();
     };
 
     const handleRejectAll = () => {
@@ -39,7 +46,7 @@ const CookieConsent = () => {
             timestamp: new Date().toISOString()
         };
         localStorage.setItem('cookieConsent', JSON.stringify(rejectConsent));
-        setIsVisible(false);
+        hideConsent();
     };
 
     const handleSavePreferences = () => {
@@ -48,19 +55,17 @@ const CookieConsent = () => {
             timestamp: new Date().toISOString()
         };
         localStorage.setItem('cookieConsent', JSON.stringify(customConsent));
-        setIsVisible(false);
+        hideConsent();
     };
 
+    if (!isVisible) return null;
+
     return (
-        <AnimatePresence>
-            {isVisible && (
-                <motion.div
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 100, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
-                >
+        <div
+            className={`fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 transition-all duration-300 ease-out ${
+                isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'
+            }`}
+        >
                     <div className="max-w-7xl mx-auto bg-zinc-900/95 backdrop-blur-xl border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
                         <div className="p-6 md:p-8">
                             <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between">
@@ -100,14 +105,8 @@ const CookieConsent = () => {
                             </div>
 
                             {/* Configuration Panel */}
-                            <AnimatePresence>
-                                {showConfig && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        className="overflow-hidden"
-                                    >
+                            {showConfig && (
+                                <div className="overflow-hidden transition-all duration-300">
                                         <div className="pt-8 mt-8 border-t border-zinc-800 grid grid-cols-1 md:grid-cols-3 gap-6">
                                             {/* Technical - Always Active */}
                                             <div className="bg-black/40 rounded-xl p-4 border border-zinc-800">
@@ -161,14 +160,11 @@ const CookieConsent = () => {
                                                 Guardar preferencias
                                             </button>
                                         </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </motion.div>
-            )}
-        </AnimatePresence>
+        </div>
     );
 };
 
