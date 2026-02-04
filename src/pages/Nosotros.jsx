@@ -14,7 +14,7 @@ const Nosotros = () => {
         {
             name: 'Guillermo Llombart',
             role: 'Project & Strategy Lead | Co-Founder',
-            image: '/Gemini_Generated_Image_lew6ylew6ylew6yl.png',
+            image: '/guillermo.png',
             description: 'Convierte la visión de los clientes en una hoja de ruta clara, creativa y ejecutable.'
         },
         {

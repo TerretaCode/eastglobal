@@ -12,6 +12,7 @@ import Contacto from './pages/Contacto';
 import Privacidad from './pages/Privacidad';
 import Terminos from './pages/Terminos';
 import Cookies from './pages/Cookies';
+import NotFound from './pages/NotFound';
 import CookieConsent from './components/CookieConsent';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/privacidad" element={<Privacidad />} />
                         <Route path="/terminos" element={<Terminos />} />
                         <Route path="/cookies" element={<Cookies />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </main>
                 <Footer />
