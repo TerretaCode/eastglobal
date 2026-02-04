@@ -27,7 +27,9 @@ const Navbar = () => {
     }, [isMobileMenuOpen]);
 
     useEffect(() => {
-        const handleScroll = () => {
+        let ticking = false;
+
+        const updateNavbarState = () => {
             const currentScrollY = window.scrollY;
 
             // Background logic
@@ -45,10 +47,18 @@ const Navbar = () => {
             }
 
             lastScrollY.current = currentScrollY;
+            ticking = false;
+        };
+
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateNavbarState);
+                ticking = true;
+            }
         };
 
         // Initial check
-        handleScroll();
+        updateNavbarState();
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);

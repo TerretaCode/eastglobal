@@ -8,12 +8,19 @@ const BackgroundEffects = () => {
     );
 
     useEffect(() => {
+        let timeoutId;
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                setIsMobile(window.innerWidth < 768);
+            }, 100);
         };
 
         window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     // Generate background blooms 
