@@ -8,8 +8,10 @@ import BackToTop from './components/common/BackToTop';
 import BackgroundEffects from './components/BackgroundEffects';
 import CookieConsent from './components/CookieConsent';
 
+// Eager loading for Home (LCP optimization)
+import Home from './pages/Home';
+
 // Lazy loading pages
-const Home = lazy(() => import('./pages/Home'));
 const Nosotros = lazy(() => import('./pages/Nosotros'));
 const Servicios = lazy(() => import('./pages/Servicios'));
 const Proyectos = lazy(() => import('./pages/Proyectos'));

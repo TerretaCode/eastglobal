@@ -21,5 +21,16 @@ export default defineConfig({
             ]
         })
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+                    animations: ['framer-motion'],
+                    icons: ['lucide-react'],
+                },
+            },
+        },
+    },
     assetsInclude: ['**/*.mp4'],
 })
