@@ -109,6 +109,8 @@ const Navbar = () => {
                             <button
                                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                                 className="flex items-center space-x-2 text-[16px] font-[500] leading-[24px] text-white hover:text-brand transition-all duration-300 py-2"
+                                aria-label="Seleccionar idioma"
+                                aria-expanded={isLangMenuOpen}
                             >
                                 <div className="p-1 rounded-lg bg-white/5 border border-white/10 group-hover/lang:border-brand/50 transition-colors overflow-hidden flex items-center justify-center">
                                     <Image
@@ -161,8 +163,10 @@ const Navbar = () => {
                     <button
                         className="lg:hidden relative z-[110] w-12 h-12 flex items-center justify-center text-gray-300 hover:text-white transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        aria-label="Abrir menú de navegación"
+                        aria-expanded={isMobileMenuOpen}
                     >
-                        {isMobileMenuOpen ? <X className="w-8 h-8 text-brand" /> : <Menu className="w-8 h-8" />}
+                        {isMobileMenuOpen ? <X className="w-8 h-8 text-brand" aria-hidden="true" /> : <Menu className="w-8 h-8" aria-hidden="true" />}
                     </button>
                 </nav>
             </div>
