@@ -48,6 +48,7 @@ const InstagramFeed = () => {
                                     allowTransparency="true"
                                     className="w-full h-full"
                                     title={`Instagram Post ${post.id}`}
+                                    loading="lazy"
                                 ></iframe>
                             </div>
                             <div className="flex items-center justify-between">

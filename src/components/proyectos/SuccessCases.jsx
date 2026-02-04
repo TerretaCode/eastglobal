@@ -57,11 +57,13 @@ const SuccessCases = () => {
                             whileHover={{ y: -10 }}
                             className="bg-zinc-900/20 border border-zinc-800 rounded-[2rem] overflow-hidden group"
                         >
-                            <div className="h-48 overflow-hidden relative">
+                            <div className="h-48 overflow-hidden relative aspect-video">
                                 <Image
                                     src={item.image}
                                     alt={item.title}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    width="600"
+                                    height="338"
                                 />
                                 <div className="absolute inset-0 bg-black/40"></div>
                             </div>

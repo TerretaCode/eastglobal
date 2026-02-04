@@ -13,11 +13,13 @@ const ServiceCard = ({ icon: Icon, title, description, features, imageAlt, image
         className="group relative bg-gray-900/50 backdrop-blur-sm rounded-3xl p-8 border border-white/5 hover:border-brand/50 transition-all duration-500 overflow-hidden"
     >
         {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 z-0 overflow-hidden aspect-video">
             <Image
                 src={imageSrc}
                 alt={imageAlt || title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-30 grayscale group-hover:grayscale-0 group-hover:opacity-50"
+                width="800"
+                height="450"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-gray-950/80 via-gray-950/90 to-black z-10" />
             <div className="absolute inset-0 bg-brand/5 group-hover:bg-brand/10 transition-colors z-20" />

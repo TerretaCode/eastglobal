@@ -10,6 +10,9 @@ const ProjectsHero = () => {
                     src="/proyectos-DA6ZUqQq.jpg"
                     alt="Proyectos Hero"
                     className="w-full h-full object-cover opacity-50"
+                    width="1920"
+                    height="1080"
+                    loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
             </div>

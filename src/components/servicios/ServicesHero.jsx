@@ -10,6 +10,9 @@ const ServicesHero = () => {
                     src="/servicios-DwMsQcYr.jpg"
                     alt="Servicios Hero"
                     className="w-full h-full object-cover"
+                    width="1920"
+                    height="1080"
+                    loading="eager"
                 />
                 <div className="absolute inset-0 bg-black/60 z-10" />
                 <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-t from-black via-black/80 to-transparent z-10" />
