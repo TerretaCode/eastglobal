@@ -1,6 +1,5 @@
 import React from 'react';
 import { trackEvent } from '../../utils/analytics';
-import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 
 const Hero = () => {
@@ -35,33 +34,11 @@ const Hero = () => {
                         </span>
                     </h1>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 50,
-                            damping: 20,
-                            mass: 1,
-                            delay: 0.3
-                        }}
-                        className="text-[18px] sm:text-[20px] md:text-[24px] text-[#D1D5DB] mb-12 sm:mb-16 max-w-4xl mx-auto leading-[32px] font-normal"
-                    >
+                    <p className="text-[18px] sm:text-[20px] md:text-[24px] text-[#D1D5DB] mb-12 sm:mb-16 max-w-4xl mx-auto leading-[32px] font-normal animate-fade-in-up">
                         Impulsamos marcas con estrategia, contenido y propósito. Así de simple.
-                    </motion.p>
+                    </p>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 50,
-                            damping: 20,
-                            mass: 1,
-                            delay: 0.5
-                        }}
-                        className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8"
-                    >
+                    <div className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8 animate-fade-in-up-delay">
                         <button
                             onClick={() => trackEvent('click_cta_button', 'Conversion', 'Hero Discovery')}
                             className="group relative px-6 sm:px-8 md:px-10 py-4 sm:py-5 bg-gradient-to-r from-brand to-pink-600 text-white font-semibold rounded-full transition-all duration-500 transform hover:scale-105 w-full sm:w-auto text-center overflow-hidden"
@@ -82,7 +59,7 @@ const Hero = () => {
                             <Play className="h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform duration-300" />
                             <span className="text-sm sm:text-base">Ver Nuestros Proyectos</span>
                         </button>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>
