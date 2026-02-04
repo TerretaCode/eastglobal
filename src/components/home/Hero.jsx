@@ -26,25 +26,14 @@ const Hero = () => {
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center max-w-6xl mx-auto">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 50,
-                            damping: 20,
-                            mass: 1,
-                            delay: 0.1
-                        }}
-                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-bold mb-8 sm:mb-10 leading-tight xl:leading-[96px] tracking-tight"
-                    >
+                    <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[96px] font-bold mb-8 sm:mb-10 leading-tight xl:leading-[96px] tracking-tight">
                         <span className="text-white block mb-2 sm:mb-3">
                             Creatividad en forma.
                         </span>
                         <span className="text-brand block">
                             Estrategia en juego.
                         </span>
-                    </motion.h1>
+                    </h1>
 
                     <motion.p
                         initial={{ opacity: 0, y: 30 }}
