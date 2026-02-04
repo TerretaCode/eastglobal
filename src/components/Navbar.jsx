@@ -87,7 +87,7 @@ const Navbar = () => {
                 <nav className="flex items-center justify-between">
                     <Link to="/" className="relative z-[110] group">
                         <Image
-                            src="/logo.png"
+                            src="/logo.webp"
                             alt="East Global Web Logo"
                             className="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300 mix-blend-normal"
                             loading="eager"

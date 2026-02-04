@@ -19,7 +19,7 @@ const Footer = () => {
                     <div className="lg:col-span-2 space-y-8">
                         <Link to="/" className="inline-block group">
                             <Image
-                                src="/logo.png"
+                                src="/logo.webp"
                                 alt="EAST"
                                 className="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300"
                                 loading="eager"
