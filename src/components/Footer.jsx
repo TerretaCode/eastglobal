@@ -21,7 +21,7 @@ const Footer = () => {
                             <Image
                                 src="/logo.png"
                                 alt="EAST"
-                                className="h-10 sm:h-12 w-40 group-hover:scale-105 transition-transform duration-300"
+                                className="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300"
                                 loading="eager"
                                 width="162"
                                 height="70"
