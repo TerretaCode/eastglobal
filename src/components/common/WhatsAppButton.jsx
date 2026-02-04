@@ -12,7 +12,9 @@ const WhatsAppButton = () => {
         const handleScroll = () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    setIsVisible(window.scrollY > 200);
+                    if (window.scrollY > 50) {
+                        setIsVisible(true);
+                    }
                     ticking = false;
                 });
                 ticking = true;
