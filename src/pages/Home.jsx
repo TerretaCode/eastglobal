@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import SEO from '../components/common/SEO';
 import Hero from '../components/home/Hero';
 import Stats from '../components/home/Stats';
 import Connection from '../components/home/Connection';
 import TrustLogos from '../components/home/TrustLogos';
-import ProcessTimeline from '../components/home/ProcessTimeline';
+
+// Lazy load ProcessTimeline to defer framer-motion animations bundle
+const ProcessTimeline = lazy(() => import('../components/home/ProcessTimeline'));
 
 const Home = () => {
     return (
@@ -17,7 +19,9 @@ const Home = () => {
             <Stats />
             <Connection />
             <TrustLogos />
-            <ProcessTimeline />
+            <Suspense fallback={<div className="py-32 bg-black" />}>
+                <ProcessTimeline />
+            </Suspense>
         </div>
     );
 };

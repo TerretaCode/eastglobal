@@ -37,20 +37,28 @@
     <meta property="twitter:description" content="Transformamos visiones en realidades digitales. Especialistas en producción audiovisual, desarrollo web y branding." />
     <meta property="twitter:image" content="/og-image.jpg" />
     
-    <!-- Google Analytics (GA4) placeholder will be handled via script in main.jsx or a component -->
+    <!-- Google Analytics (GA4) - Deferred loading for performance -->
     <script>
-      // Function to load GA4 dynamically from env
+      // Deferred GA4 loading - waits until browser is idle
       window.loadGA = function(id) {
         if (!id) return;
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
-        document.head.appendChild(script);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', id);
+        var load = function() {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+          document.head.appendChild(script);
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', id, { send_page_view: true });
+        };
+        // Defer until browser is idle or after 3s timeout
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(load, { timeout: 3000 });
+        } else {
+          setTimeout(load, 3000);
+        }
       };
     </script>
 </head>
