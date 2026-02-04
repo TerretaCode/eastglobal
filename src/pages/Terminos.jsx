@@ -1,16 +1,18 @@
 import React from 'react';
+import SEO from '../components/common/SEO';
 import { motion } from 'framer-motion';
 
 const Terminos = () => {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-[#EBC7DD]/30">
+        <div className="min-h-screen bg-black text-white selection:bg-brand/30">
+            <SEO title="Términos de Servicio" description="Términos y condiciones de uso de nuestros servicios." />
             <div className="container mx-auto px-4 py-32 max-w-4xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Términos de <span className="text-[#EBC7DD]">Servicio</span></h1>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Términos de <span className="text-brand">Servicio</span></h1>
                     <p className="text-gray-400 mb-12">Última actualización: 06/07/2025</p>
 
                     <div className="space-y-12 text-gray-300 leading-relaxed">
@@ -56,7 +58,7 @@ const Terminos = () => {
 
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">Contacto</h2>
-                            <p>Si tienes dudas sobre estos Términos de Servicio, puedes escribirnos a <a href="mailto:contacto@eastglobal.es" className="text-[#EBC7DD] hover:underline">contacto@eastglobal.es</a>.</p>
+                            <p>Si tienes dudas sobre estos Términos de Servicio, puedes escribirnos a <a href="mailto:contacto@eastglobal.es" className="text-brand hover:underline">contacto@eastglobal.es</a>.</p>
                         </section>
                     </div>
                 </motion.div>

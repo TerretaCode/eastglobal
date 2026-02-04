@@ -65,14 +65,14 @@ const CookieConsent = () => {
                         <div className="p-6 md:p-8">
                             <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between">
                                 <div className="space-y-4 max-w-3xl">
-                                    <div className="flex items-center gap-3 text-[#EBC7DD]">
+                                    <div className="flex items-center gap-3 text-brand">
                                         <Shield className="w-6 h-6" />
                                         <h3 className="font-bold text-lg">Tu privacidad es nuestra prioridad</h3>
                                     </div>
                                     <p className="text-gray-400 text-sm leading-relaxed">
                                         Utilizamos cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y ofrecerte contenido personalizado.
                                         Puedes aceptar todas las cookies, rechazarlas o configurar tus preferencias.
-                                        Para más información, consulta nuestra <a href="/cookies" className="text-[#EBC7DD] hover:underline">Política de Cookies</a>.
+                                        Para más información, consulta nuestra <a href="/cookies" className="text-brand hover:underline">Política de Cookies</a>.
                                     </p>
                                 </div>
 
@@ -86,13 +86,13 @@ const CookieConsent = () => {
                                     </button>
                                     <button
                                         onClick={handleRejectAll}
-                                        className="px-6 py-3 rounded-xl border border-[#EBC7DD]/30 text-white font-medium hover:bg-[#EBC7DD]/10 transition-colors"
+                                        className="px-6 py-3 rounded-xl border border-brand/30 text-white font-medium hover:bg-brand/10 transition-colors"
                                     >
                                         Rechazar todo
                                     </button>
                                     <button
                                         onClick={handleAcceptAll}
-                                        className="px-6 py-3 rounded-xl bg-[#EBC7DD] text-black font-bold hover:bg-[#D4AFCB] transition-colors shadow-lg shadow-[#EBC7DD]/20"
+                                        className="px-6 py-3 rounded-xl bg-brand text-black font-bold hover:bg-brand-dark transition-colors shadow-lg shadow-brand/20"
                                     >
                                         Aceptar todo
                                     </button>
@@ -113,7 +113,7 @@ const CookieConsent = () => {
                                             <div className="bg-black/40 rounded-xl p-4 border border-zinc-800">
                                                 <div className="flex items-center justify-between mb-2">
                                                     <span className="font-bold text-white">Técnicas</span>
-                                                    <span className="text-[10px] uppercase font-bold text-[#EBC7DD] bg-[#EBC7DD]/10 px-2 py-1 rounded-full">Necesarias</span>
+                                                    <span className="text-[10px] uppercase font-bold text-brand bg-brand/10 px-2 py-1 rounded-full">Necesarias</span>
                                                 </div>
                                                 <p className="text-xs text-gray-500">Esenciales para el funcionamiento básico del sitio. No se pueden desactivar.</p>
                                             </div>
@@ -129,7 +129,7 @@ const CookieConsent = () => {
                                                             checked={preferences.analytics}
                                                             onChange={(e) => setPreferences({ ...preferences, analytics: e.target.checked })}
                                                         />
-                                                        <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#EBC7DD]/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#EBC7DD]"></div>
+                                                        <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
                                                     </label>
                                                 </div>
                                                 <p className="text-xs text-gray-500">Nos ayudan a entender cómo interactúas con la web para mejorarla.</p>
@@ -146,7 +146,7 @@ const CookieConsent = () => {
                                                             checked={preferences.marketing}
                                                             onChange={(e) => setPreferences({ ...preferences, marketing: e.target.checked })}
                                                         />
-                                                        <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#EBC7DD]/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#EBC7DD]"></div>
+                                                        <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-brand/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
                                                     </label>
                                                 </div>
                                                 <p className="text-xs text-gray-500">Permiten mostrarte contenido y anuncios relevantes para ti.</p>

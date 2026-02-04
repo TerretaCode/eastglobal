@@ -70,5 +70,5 @@
 }
 
 .gradient-text {
-    @apply bg-gradient-to-r from-white to-[#EBC7DD] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white to-brand bg-clip-text text-transparent;
 }

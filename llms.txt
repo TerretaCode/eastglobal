@@ -1,0 +1,27 @@
+# East Global - Proyecto de Marketing Digital y Producción Audiovisual
+
+Agencia creativa con sede en Valencia, especializada en transformar visiones en realidades digitales mediante estrategia, contenido y tecnología.
+
+## Stack Tecnológico
+- **Frontend**: React 18, Vite, Tailwind CSS
+- **Animaciones**: Framer Motion
+- **Iconos**: Lucide React
+- **SEO**: React Helmet Async
+- **Analytics**: Google Analytics 4 (GA4)
+
+## Estructura del Proyecto
+- `/src/components`: Componentes modulares organizados por secciones (home, nosotros, servicios, proyectos, rrss, contacto).
+- `/src/pages`: Páginas principales de la aplicación.
+- `/src/utils`: Utilidades globales (analytics, etc.).
+- `/src/components/common`: Componentes reutilizables (Image con lazy loading, SEO, BackToTop).
+
+## Características Principales
+- **Lazy Loading**: Sistema global de carga diferida para todas las imágenes.
+- **SEO Dinámico**: Gestión de metadatos individual por página.
+- **Diseño Premium**: Interfaz oscura con efectos de desenfoque (glassmorphism) y gradientes de marca.
+- **Centralización**: Colores y estilos gestionados mediante configuración de Tailwind.
+
+## Contacto
+- **Web**: https://eastglobal.es
+- **Email**: contacto@eastglobal.es
+- **Ubicación**: Valencia, España

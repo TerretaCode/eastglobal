@@ -64,7 +64,7 @@ const BackgroundEffects = () => {
                 .ember {
                     position: absolute;
                     /* Optimization: Use gradient instead of box-shadow for glow */
-                    background: radial-gradient(circle, #EBC7DD 0%, transparent 70%);
+                    background: radial-gradient(circle, rgb(235, 199, 221) 0%, transparent 70%);
                     /* Only apply box-shadow on desktop where GPU can handle it easily */
                     ${!isMobile ? 'box-shadow: 0 0 10px rgba(235, 199, 221, 0.6);' : ''}
                     will-change: transform;

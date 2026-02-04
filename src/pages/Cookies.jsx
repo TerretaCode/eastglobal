@@ -1,16 +1,18 @@
 import React from 'react';
+import SEO from '../components/common/SEO';
 import { motion } from 'framer-motion';
 
 const Cookies = () => {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-[#EBC7DD]/30">
+        <div className="min-h-screen bg-black text-white selection:bg-brand/30">
+            <SEO title="Política de Cookies" description="Información sobre el uso de cookies en nuestra web." />
             <div className="container mx-auto px-4 py-32 max-w-4xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Política de <span className="text-[#EBC7DD]">Cookies</span></h1>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Política de <span className="text-brand">Cookies</span></h1>
                     <p className="text-gray-400 mb-12">Última actualización: 06/07/2025</p>
 
                     <div className="space-y-12 text-gray-300 leading-relaxed">

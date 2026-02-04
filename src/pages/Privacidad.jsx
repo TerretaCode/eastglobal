@@ -1,16 +1,18 @@
 import React from 'react';
+import SEO from '../components/common/SEO';
 import { motion } from 'framer-motion';
 
 const Privacidad = () => {
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-[#EBC7DD]/30">
+        <div className="min-h-screen bg-black text-white selection:bg-brand/30">
+            <SEO title="Política de Privacidad" description="Consulta nuestra política de privacidad y cómo tratamos tus datos personales." />
             <div className="container mx-auto px-4 py-32 max-w-4xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Política de <span className="text-[#EBC7DD]">Privacidad</span></h1>
+                    <h1 className="text-4xl md:text-6xl font-bold mb-4">Política de <span className="text-brand">Privacidad</span></h1>
                     <p className="text-gray-400 mb-12">Última actualización: 06/07/2025</p>
 
                     <div className="space-y-12 text-gray-300 leading-relaxed">
@@ -64,7 +66,7 @@ const Privacidad = () => {
                                 <li>Limitar u oponerte a su tratamiento</li>
                                 <li>Retirar tu consentimiento en cualquier momento</li>
                             </ul>
-                            <p className="mt-4">Para ejercer estos derechos, puedes escribirnos a <a href="mailto:contacto@eastglobal.es" className="text-[#EBC7DD] hover:underline">contacto@eastglobal.es</a>.</p>
+                            <p className="mt-4">Para ejercer estos derechos, puedes escribirnos a <a href="mailto:contacto@eastglobal.es" className="text-brand hover:underline">contacto@eastglobal.es</a>.</p>
                         </section>
 
                         <section>

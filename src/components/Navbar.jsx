@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { trackEvent } from '../utils/analytics';
 import { Link, useLocation } from 'react-router-dom';
+import Image from './common/Image';
 import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -74,10 +76,11 @@ const Navbar = () => {
             <div className="container mx-auto px-4 md:px-6">
                 <nav className="flex items-center justify-between">
                     <Link to="/" className="relative z-[110] group">
-                        <img
+                        <Image
                             src="/logo.png"
                             alt="East Global Web Logo"
                             className="h-10 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300 mix-blend-normal"
+                            loading="eager"
                         />
                     </Link>
 
@@ -87,11 +90,14 @@ const Navbar = () => {
                             <Link
                                 key={link.name}
                                 to={link.path}
-                                className={`text-[16px] font-[500] leading-[24px] transition-all duration-300 relative group ${location.pathname === link.path ? 'text-[#EBC7DD]' : 'text-white hover:text-[#EBC7DD]'
+                                onClick={() => {
+                                    if (link.path === '/contacto') trackEvent('click_contact_link', 'Navigation', 'Navbar');
+                                }}
+                                className={`text-[16px] font-[500] leading-[24px] transition-all duration-300 relative group ${location.pathname === link.path ? 'text-brand' : 'text-white hover:text-brand'
                                     }`}
                             >
                                 {link.name}
-                                <span className={`absolute -bottom-1 left-0 h-0.5 bg-[#EBC7DD] transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
+                                <span className={`absolute -bottom-1 left-0 h-0.5 bg-brand transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover:w-full'
                                     }`} />
                             </Link>
                         ))}
@@ -100,13 +106,14 @@ const Navbar = () => {
                         <div className="relative group/lang">
                             <button
                                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                                className="flex items-center space-x-2 text-[16px] font-[500] leading-[24px] text-white hover:text-[#EBC7DD] transition-all duration-300 py-2"
+                                className="flex items-center space-x-2 text-[16px] font-[500] leading-[24px] text-white hover:text-brand transition-all duration-300 py-2"
                             >
-                                <div className="p-1 rounded-lg bg-white/5 border border-white/10 group-hover/lang:border-[#EBC7DD]/50 transition-colors overflow-hidden flex items-center justify-center">
-                                    <img
+                                <div className="p-1 rounded-lg bg-white/5 border border-white/10 group-hover/lang:border-brand/50 transition-colors overflow-hidden flex items-center justify-center">
+                                    <Image
                                         src={languages.find(l => l.code === 'ES')?.flag}
                                         alt="ES"
                                         className="w-5 h-3.5 object-cover rounded-sm shadow-sm"
+                                        loading="eager"
                                     />
                                 </div>
                                 <span className="tracking-wide">ES</span>
@@ -124,11 +131,11 @@ const Navbar = () => {
                                         {languages.map((lang) => (
                                             <button
                                                 key={lang.code}
-                                                className={`w-full px-4 py-3 text-left text-[14px] font-[500] rounded-xl transition-all duration-300 flex items-center justify-between group/item ${lang.code === 'ES' ? 'text-[#EBC7DD] bg-[#EBC7DD]/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                                                className={`w-full px-4 py-3 text-left text-[14px] font-[500] rounded-xl transition-all duration-300 flex items-center justify-between group/item ${lang.code === 'ES' ? 'text-brand bg-brand/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'
                                                     }`}
                                             >
                                                 <div className="flex items-center space-x-3">
-                                                    <img
+                                                    <Image
                                                         src={lang.flag}
                                                         alt={lang.code}
                                                         className="w-5 h-3.5 object-cover rounded-sm shadow-sm"
@@ -136,7 +143,7 @@ const Navbar = () => {
                                                     <span>{lang.name}</span>
                                                 </div>
                                                 {lang.code === 'ES' && (
-                                                    <div className="w-1.5 h-1.5 rounded-full bg-[#EBC7DD] shadow-[0_0_10px_#EBC7DD]" />
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-brand shadow-[0_0_10px_rgb(235,199,221)]" />
                                                 )}
                                             </button>
                                         ))}
@@ -151,7 +158,7 @@ const Navbar = () => {
                         className="lg:hidden relative z-[110] w-12 h-12 flex items-center justify-center text-gray-300 hover:text-white transition-colors"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
-                        {isMobileMenuOpen ? <X className="w-8 h-8 text-[#EBC7DD]" /> : <Menu className="w-8 h-8" />}
+                        {isMobileMenuOpen ? <X className="w-8 h-8 text-brand" /> : <Menu className="w-8 h-8" />}
                     </button>
                 </nav>
             </div>
@@ -183,7 +190,7 @@ const Navbar = () => {
                                     <Link
                                         to={link.path}
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className={`text-4xl font-bold transition-all duration-300 ${location.pathname === link.path ? 'text-[#EBC7DD]' : 'text-white'
+                                        className={`text-4xl font-bold transition-all duration-300 ${location.pathname === link.path ? 'text-brand' : 'text-white'
                                             }`}
                                     >
                                         {link.name}
@@ -202,8 +209,8 @@ const Navbar = () => {
                                         key={lang.code}
                                         className="flex flex-col items-center space-y-2 text-gray-400 hover:text-white font-medium group"
                                     >
-                                        <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:border-[#EBC7DD]/50 transition-all">
-                                            <img
+                                        <div className="p-2 rounded-xl bg-white/5 border border-white/10 group-hover:border-brand/50 transition-all">
+                                            <Image
                                                 src={lang.flag}
                                                 alt={lang.code}
                                                 className="w-8 h-5 object-cover rounded shadow-sm"

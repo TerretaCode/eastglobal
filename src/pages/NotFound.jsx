@@ -19,7 +19,7 @@ const NotFound = () => {
                     <h1 className="text-[120px] md:text-[200px] font-bold leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-800 select-none">
                         404
                     </h1>
-                    <div className="h-2 w-32 bg-[#EBC7DD] mx-auto rounded-full mt-4 mb-8" />
+                    <div className="h-2 w-32 bg-brand mx-auto rounded-full mt-4 mb-8" />
                 </motion.div>
 
                 <motion.div
@@ -29,7 +29,7 @@ const NotFound = () => {
                     className="max-w-xl mx-auto space-y-8"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold text-white">
-                        ¿Perdido en el <span className="text-[#EBC7DD]">espacio digital</span>?
+                        ¿Perdido en el <span className="text-brand">espacio digital</span>?
                     </h2>
 
                     <p className="text-gray-400 text-lg leading-relaxed">
