@@ -19,7 +19,7 @@ const WhatsAppButton = () => {
             aria-label="Contactar por WhatsApp"
         >
             <svg 
-                className="w-6 h-6 text-white fill-current"
+                className="w-6 h-6 text-black fill-current"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
             >
