@@ -16,7 +16,8 @@ const Hero = () => {
                     aria-hidden="true"
                     tabIndex="-1"
                 >
-                    <source src="/hero-video.mp4" type="video/mp4" />
+                    <source src="https://res.cloudinary.com/dfmakzema/video/upload/q_auto,f_auto/v1770219275/hero-video_mgwhoj.webm" type="video/webm" />
+                    <source src="https://res.cloudinary.com/dfmakzema/video/upload/q_auto/v1770219275/hero-video_mgwhoj.mp4" type="video/mp4" />
                     <track kind="captions" src="" label="sin subtítulos" default />
                 </video>
                 <div className="absolute inset-0 bg-black bg-opacity-60"></div>
