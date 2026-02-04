@@ -17,7 +17,7 @@ const Hero = () => {
                     aria-hidden="true"
                     tabIndex="-1"
                 >
-                    <source src="/videoeast-BLt3PZxT.mp4" type="video/mp4" />
+                    <source src="/hero-video.mp4" type="video/mp4" />
                     <track kind="captions" src="" label="sin subtítulos" default />
                 </video>
                 <div className="absolute inset-0 bg-black bg-opacity-60"></div>
